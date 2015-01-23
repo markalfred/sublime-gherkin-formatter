@@ -68,6 +68,7 @@ There are a few ways to use it:
 - `<Cmd> + <Shift> + |` - This matches the TextMate cucumber plugin's key binding.
 - `<Ctrl> + <Alt> + G` - DEPRECATED. Original key binding still set to avoid surprise when upgrading the plugin.
 - Select "Gherkin/Cucumber: Format" from the Command Palette.
+- Set `{ "format_on_save": true }` to automatically format every time you save.
 
 ## Contributing
 
