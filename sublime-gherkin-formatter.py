@@ -23,7 +23,17 @@ class FormatGherkinCommand(sublime_plugin.TextCommand):
     ViewFormatter(sublime, self.view).format_view(edit)
 
 class FormatGherkinOnSave(sublime_plugin.EventListener):
-  def on_pre_save(self, view):
+  def should_format(self, view):
     settings = sublime.load_settings('GherkinFormatter.sublime-settings')
-    if settings.get('format_on_save'):
+    if not settings.get('format_on_save'):
+      return False
+    if not is_gherkin(view):
+      return False
+    for region in view.sel():
+      if not region.empty():
+        return False
+    return True
+
+  def on_pre_save(self, view):
+    if self.should_format(view):
       view.run_command('format_gherkin')
